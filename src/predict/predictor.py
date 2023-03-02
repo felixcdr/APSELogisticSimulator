@@ -16,16 +16,11 @@ with open('../../models/le.pkl', 'rb') as f:
     labelEncoder = pickle.load(f)
 
 
+
 # Endpoint for route prediction model
 # Input is a json object with attribute time
 @app.route('/predict_eta', methods=['POST'])
 def predict_eta():
-    
-    # Get the JSON data from the request body
-    data = np.array(request.get_json()['time']).reshape(-1,1)
-
-    # Make a prediction using the model
-    prediccion = modelo_tiempo_viaje.predict(data)
 
     # Return the prediction as a JSON response
     return jsonify({'prediction': prediccion[0]})
@@ -35,13 +30,7 @@ def predict_eta():
 @app.route('/predict_delivery', methods=['POST'])
 def predict_delivery():
         
-    # this model only considers the truckId as a feature    
-    data = request.get_json()['truckId']
-    # we use the encoder to parse the number plate
-    data = labelEncoder.transform([data])[0]
-    data = np.array(data,dtype=int)
-       
-    prediccion = modelo_tiempo_entrega.predict(data.reshape(-1, 1) )[0]
+
 
     # Return the prediction as a JSON response  
     return jsonify({'prediction': prediccion[0]})
