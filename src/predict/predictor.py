@@ -21,6 +21,9 @@ with open('../../models/le.pkl', 'rb') as f:
 # Input is a json object with attribute time
 @app.route('/predict_eta', methods=['POST'])
 def predict_eta():
+    # Get the JSON data from the request body
+    data = np.array(request.get_json()['time'])
+
 
     # Return the prediction as a JSON response
     return jsonify({'prediction': prediccion[0]})
