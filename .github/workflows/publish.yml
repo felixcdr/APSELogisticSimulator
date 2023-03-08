@@ -1,4 +1,7 @@
-publish-to-ghcr:
+name: build and test CI workflow
+on: [push]
+jobs:
+  publish-to-ghcr:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
