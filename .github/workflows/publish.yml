@@ -1,5 +1,8 @@
-name: build and test CI workflow
-on: [push]
+name: testing publish image workflow
+on:
+  pull_request:
+    types: [closed]
+
 jobs:
   publish-to-ghcr:
     runs-on: ubuntu-latest
